@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[11]:
 
 
 import pandas as pd
 import numpy as np
 
 
-# In[ ]:
+# In[12]:
 
 
-df = pd.read_csv('archivos_csv\estimaciones_agricolas_69_23.csv', encoding='ISO-8859-1')
+df = pd.read_csv('../archivos_csv/estimaciones_agricolas_69_23.csv', encoding='ISO-8859-1')
 df
 
 
@@ -21,7 +21,7 @@ df
 
 # <p>Codigo en una linea</p>
 
-# In[ ]:
+# In[13]:
 
 
 # En una sola linea
@@ -31,7 +31,7 @@ estructura
 
 # <p>Codigo en varias lineas. Paso a paso</p>
 
-# In[ ]:
+# In[14]:
 
 
 # Paso a paso
@@ -55,7 +55,7 @@ estructura2
 
 # ### Transformando a Data Frames
 
-# In[ ]:
+# In[15]:
 
 
 provincias = estructura.keys()
@@ -76,7 +76,7 @@ print(count, '\n', prov_error, dep_error)
 
 # ## Coronel Suarez y alrededores
 
-# In[ ]:
+# In[16]:
 
 
 list_area = ['Coronel Suarez', 'Adolfo Alsina', 'Guamini', 'Daireaux', 'General La Madrid', 'General la Madrid' , 'Saavedra', 'Coronel Pringles', 'Tornquist']
@@ -85,7 +85,7 @@ Suarez_alrededores = {dep: estructura['Buenos Aires'][dep] for dep in list_area}
 
 # <p>Combinando los dos <b>General La Madrid</b></p>
 
-# In[ ]:
+# In[17]:
 
 
 Suarez_alrededores['General La Madrid'] = pd.concat([Suarez_alrededores['General La Madrid'], Suarez_alrededores['General la Madrid']], ignore_index=True)
@@ -107,9 +107,9 @@ Suarez_alrededores['General La Madrid'] = pd.concat([Suarez_alrededores['General
 
 # ---
 
-# In[2]:
+# In[1]:
 
 
-import nbconvert
-get_ipython().system('jupyter nbconvert --to script --execute 2_DataProcess.ipynb')
+import nbconvert #No agregar el --execute. Tarda mucho
+get_ipython().system('jupyter nbconvert --to script --output-dir="../" 2_DataProcess.ipynb')
 

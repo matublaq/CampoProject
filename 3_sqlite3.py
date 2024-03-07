@@ -28,3 +28,12 @@ except Exception as ex:
 
 
 
+
+# ---
+
+# In[1]:
+
+
+import nbconvert #No poner --execute. Tarda mucho
+get_ipython().system('jupyter nbconvert --to script --output-dir="../" 3_sqlite3.ipynb')
+
