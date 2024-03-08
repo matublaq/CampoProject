@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[11]:
+# In[1]:
 
 
 import pandas as pd
 import numpy as np
 
 
-# In[12]:
+# In[2]:
 
 
 df = pd.read_csv('archivos_csv/estimaciones_agricolas_69_23.csv', encoding='ISO-8859-1')
@@ -21,7 +21,7 @@ df
 
 # <p>Codigo en una linea</p>
 
-# In[13]:
+# In[3]:
 
 
 # En una sola linea
@@ -31,7 +31,7 @@ estructura
 
 # <p>Codigo en varias lineas. Paso a paso</p>
 
-# In[14]:
+# In[4]:
 
 
 # Paso a paso
@@ -55,7 +55,7 @@ estructura2
 
 # ### Transformando a Data Frames
 
-# In[15]:
+# In[5]:
 
 
 provincias = estructura.keys()
@@ -76,7 +76,7 @@ print(count, '\n', prov_error, dep_error)
 
 # ## Coronel Suarez y alrededores
 
-# In[16]:
+# In[6]:
 
 
 list_area = ['Coronel Suarez', 'Adolfo Alsina', 'Guamini', 'Daireaux', 'General La Madrid', 'General la Madrid' , 'Saavedra', 'Coronel Pringles', 'Tornquist']
@@ -85,7 +85,7 @@ Suarez_alrededores = {dep: estructura['Buenos Aires'][dep] for dep in list_area}
 
 # <p>Combinando los dos <b>General La Madrid</b></p>
 
-# In[17]:
+# In[7]:
 
 
 Suarez_alrededores['General La Madrid'] = pd.concat([Suarez_alrededores['General La Madrid'], Suarez_alrededores['General la Madrid']], ignore_index=True)
