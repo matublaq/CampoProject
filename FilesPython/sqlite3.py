@@ -15,7 +15,7 @@ import sqlite3
 
 
 try:
-    mi_conexion = sqlite3.connect('DataBase/CampoProject_database')
+    mi_conexion = sqlite3.connect('..\\DataBase/CampoProject_database')
     cursor = mi_conexion.cursor()
 except Exception as ex:
     print(ex)

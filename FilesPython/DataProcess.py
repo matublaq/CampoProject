@@ -11,7 +11,7 @@ import numpy as np
 # In[2]:
 
 
-df = pd.read_csv('archivos_csv/estimaciones_agricolas_69_23.csv', encoding='ISO-8859-1')
+df = pd.read_csv('..\\archivos_csv/estimaciones_agricolas_69_23.csv', encoding='ISO-8859-1')
 df
 
 
