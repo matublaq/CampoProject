@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[3]:
 
 
 import pandas as pd
@@ -15,11 +15,13 @@ from DataCollection import df
 df
 
 
+# ---
+
 # ## Tablas
 # ### <p>Las tablas son la informacion de los departamentos de cada provincia</p>
 # <p>Provincias --> Departamentos --> Tablas</p>
 
-# <p>Codigo en una linea</p>
+# - <p>Codigo en una linea</p>
 
 # In[3]:
 
@@ -29,7 +31,7 @@ estructura = {key1: {key2: df[df['provincia'] == key1][df['departamento'] == key
 estructura
 
 
-# <p>Codigo en varias lineas. Paso a paso</p>
+# - <p>Codigo en varias lineas. Paso a paso</p>
 
 # In[4]:
 
@@ -50,8 +52,6 @@ for prov in estructura2:
 
 estructura2
 
-
-# ---
 
 # ### Transformando a Data Frames
 
@@ -74,6 +74,8 @@ except KeyError:
 print(count, '\n', prov_error, dep_error)
 
 
+# ---
+
 # ## Coronel Suarez y alrededores
 
 # In[6]:
@@ -89,4 +91,44 @@ Suarez_alrededores = {dep: estructura['Buenos Aires'][dep] for dep in list_area}
 
 
 Suarez_alrededores['General La Madrid'] = pd.concat([Suarez_alrededores['General La Madrid'], Suarez_alrededores['General la Madrid']], ignore_index=True)
+
+
+# ### Mapa
+
+# In[10]:
+
+
+import folium
+import json
+
+
+# In[24]:
+
+
+# Cargando limites geograficos de los departamentos
+with open('../visualizacion/geojson/suarez_alrededores.geojson') as f:
+    geojson_data = json.load(f)
+
+# mapa object
+mapa = folium.Map()
+
+# Agrega la capa GEOJSON al mapa y aplica estilos
+folium.GeoJson(
+    geojson_data, 
+    style_function=lambda features: {
+        'fillColor': 'green',   # Color de relleno verde
+        'color': 'black',       # Color del contorno de los departamentos
+        'weight': 2,            # Grosor del contorno de los departamentos
+        'fillOpacity': 0.5      # Opacidad del relleno de los departamentos
+    }
+).add_to(mapa)
+
+# Muestra el mapa
+mapa
+
+
+# In[ ]:
+
+
+
 
