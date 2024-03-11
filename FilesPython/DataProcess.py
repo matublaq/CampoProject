@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[1]:
 
 
 import pandas as pd
@@ -37,7 +37,7 @@ estructura
 
 
 # Paso a paso
-
+'''
 # Provincias
 estructura2 = {key: 0 for key in set(df['provincia'])}
 
@@ -51,6 +51,7 @@ for prov in estructura2:
         estructura2[prov][depa] = df[df['provincia'] == prov][df['departamento'] == depa].drop(['id_provincia', 'provincia', 'id_departamento', 'departamento', 'id_cultivo'], axis=1)
 
 estructura2
+'''
 
 
 # ### Transformando a Data Frames
@@ -60,9 +61,11 @@ estructura2
 
 provincias = estructura.keys()
 count = 0
+prov_error = None
+dep_error = None
 try:
     for prov in provincias:
-        departamentos = estructura[i].keys()
+        departamentos = estructura[prov].keys()
         for dep in departamentos:
             estructura[prov][dep] = pd.DataFrame(estructura[prov][dep])
 except KeyError:
@@ -76,21 +79,28 @@ print(count, '\n', prov_error, dep_error)
 
 # ---
 
-# ## Coronel Suarez y alrededores
-
 # In[6]:
 
 
-list_area = ['Coronel Suarez', 'Adolfo Alsina', 'Guamini', 'Daireaux', 'General La Madrid', 'General la Madrid' , 'Saavedra', 'Coronel Pringles', 'Tornquist']
+estructura['Buenos Aires'].keys()
+
+
+# ## Coronel Suarez y alrededores
+
+# In[14]:
+
+
+list_area = ['Coronel Suarez', 'Adolfo Alsina', 'Guamini', 'Daireaux', 'General La Madrid', 'General la Madrid' , 'Saavedra', 'Coronel Pringles', 'Tornquist', 'Olavarria', 'Laprida']
 Suarez_alrededores = {dep: estructura['Buenos Aires'][dep] for dep in list_area}
 
 
 # <p>Combinando los dos <b>General La Madrid</b></p>
 
-# In[7]:
+# In[17]:
 
 
 Suarez_alrededores['General La Madrid'] = pd.concat([Suarez_alrededores['General La Madrid'], Suarez_alrededores['General la Madrid']], ignore_index=True)
+del Suarez_alrededores['General la Madrid']
 
 
 # ### Mapa
@@ -102,7 +112,7 @@ import folium
 import json
 
 
-# In[24]:
+# In[11]:
 
 
 # Cargando limites geograficos de los departamentos
@@ -110,11 +120,11 @@ with open('../visualizacion/geojson/suarez_alrededores.geojson') as f:
     geojson_data = json.load(f)
 
 # mapa object
-mapa = folium.Map()
+mapa = folium.Map(location=[-37.45798801348687, -61.93294229940922], zoom_start=8)
 
 # Agrega la capa GEOJSON al mapa y aplica estilos
 folium.GeoJson(
-    geojson_data, 
+    geojson_data,
     style_function=lambda features: {
         'fillColor': 'green',   # Color de relleno verde
         'color': 'black',       # Color del contorno de los departamentos
@@ -123,6 +133,9 @@ folium.GeoJson(
     }
 ).add_to(mapa)
 
+# Agregar marcadores
+folium.Marker([-37.29261188022635, -62.20015596276018], popup='Don Gaston').add_to(mapa)
+folium.Marker([-37.31521756433013, -61.49986789793718], popup='La Carola').add_to(mapa)
 # Muestra el mapa
 mapa
 
