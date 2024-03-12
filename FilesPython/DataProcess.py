@@ -87,32 +87,32 @@ estructura['Buenos Aires'].keys()
 
 # ## Coronel Suarez y alrededores
 
-# In[14]:
+# In[7]:
 
 
 list_area = ['Coronel Suarez', 'Adolfo Alsina', 'Guamini', 'Daireaux', 'General La Madrid', 'General la Madrid' , 'Saavedra', 'Coronel Pringles', 'Tornquist', 'Olavarria', 'Laprida']
-Suarez_alrededores = {dep: estructura['Buenos Aires'][dep] for dep in list_area}
+Area_dep = {dep: estructura['Buenos Aires'][dep] for dep in list_area}
 
 
 # <p>Combinando los dos <b>General La Madrid</b></p>
 
-# In[17]:
+# In[8]:
 
 
-Suarez_alrededores['General La Madrid'] = pd.concat([Suarez_alrededores['General La Madrid'], Suarez_alrededores['General la Madrid']], ignore_index=True)
-del Suarez_alrededores['General la Madrid']
+Area_dep['General La Madrid'] = pd.concat([Area_dep['General La Madrid'], Area_dep['General la Madrid']], ignore_index=True)
+del Area_dep['General la Madrid']
 
 
 # ### Mapa
 
-# In[10]:
+# In[9]:
 
 
 import folium
 import json
 
 
-# In[11]:
+# In[10]:
 
 
 # Cargando limites geograficos de los departamentos
