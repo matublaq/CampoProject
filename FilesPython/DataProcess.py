@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[108]:
 
 
 import pandas as pd
 import numpy as np
 
 
-# In[2]:
+# In[109]:
 
 
 from DataCollection import df
@@ -23,7 +23,7 @@ df
 
 # - <p>Codigo en una linea</p>
 
-# In[3]:
+# In[110]:
 
 
 # En una sola linea
@@ -33,7 +33,7 @@ estructura
 
 # - <p>Codigo en varias lineas. Paso a paso</p>
 
-# In[4]:
+# In[111]:
 
 
 # Paso a paso
@@ -56,7 +56,7 @@ estructura2
 
 # ### Transformando a Data Frames
 
-# In[5]:
+# In[122]:
 
 
 provincias = estructura.keys()
@@ -68,6 +68,8 @@ try:
         departamentos = estructura[prov].keys()
         for dep in departamentos:
             estructura[prov][dep] = pd.DataFrame(estructura[prov][dep])
+            # Convierte todos los valores a integer y los que no puede se los pone como NaN
+            estructura[prov][dep][['id_campaña', 'sup_sembrada', 'sup_cosechada', 'rendimiento']] = estructura[prov][dep][['id_campaña', 'sup_sembrada', 'sup_cosechada', 'rendimiento']].apply(pd.to_numeric, errors='coerce')
 except KeyError:
     count += 1
     prov_error = prov
@@ -77,9 +79,17 @@ except KeyError:
 print(count, '\n', prov_error, dep_error)
 
 
+# ### Acomodando los tipos de datos
+
+# In[ ]:
+
+
+
+
+
 # ---
 
-# In[6]:
+# In[113]:
 
 
 estructura['Buenos Aires'].keys()
@@ -87,7 +97,7 @@ estructura['Buenos Aires'].keys()
 
 # ## Coronel Suarez y alrededores
 
-# In[7]:
+# In[114]:
 
 
 list_area = ['Coronel Suarez', 'Adolfo Alsina', 'Guamini', 'Daireaux', 'General La Madrid', 'General la Madrid' , 'Saavedra', 'Coronel Pringles', 'Tornquist', 'Olavarria', 'Laprida']
@@ -96,7 +106,7 @@ Area_dep = {dep: estructura['Buenos Aires'][dep] for dep in list_area}
 
 # <p>Combinando los dos <b>General La Madrid</b></p>
 
-# In[8]:
+# In[115]:
 
 
 Area_dep['General La Madrid'] = pd.concat([Area_dep['General La Madrid'], Area_dep['General la Madrid']], ignore_index=True)
@@ -105,14 +115,14 @@ del Area_dep['General la Madrid']
 
 # ### Mapa
 
-# In[9]:
+# In[116]:
 
 
 import folium
 import json
 
 
-# In[10]:
+# In[117]:
 
 
 # Cargando limites geograficos de los departamentos
