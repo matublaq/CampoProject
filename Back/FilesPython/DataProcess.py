@@ -18,8 +18,8 @@ df
 # ---
 
 # ## Tablas
-# ### <p>Las tablas son la informacion de los departamentos de cada provincia</p>
-# <p>Provincias --> Departamentos --> Tablas</p>
+# ### <p>Cada tabla tiene la informacion de cada departamento de las provincias</p>
+# <p>Argentina --> Provincias --> Departamentos</p>
 
 # - <p>Codigo en una linea</p>
 
@@ -54,7 +54,7 @@ estructura2
 '''
 
 
-# ### Transformando a Data Frames
+# ### Transformando a Data Frames y acomodando tipos de datos
 
 # In[122]:
 
@@ -70,6 +70,7 @@ try:
             estructura[prov][dep] = pd.DataFrame(estructura[prov][dep])
             # Convierte todos los valores a integer y los que no puede se los pone como NaN
             estructura[prov][dep][['id_campaña', 'sup_sembrada', 'sup_cosechada', 'rendimiento']] = estructura[prov][dep][['id_campaña', 'sup_sembrada', 'sup_cosechada', 'rendimiento']].apply(pd.to_numeric, errors='coerce')
+            #
 except KeyError:
     count += 1
     prov_error = prov
@@ -79,23 +80,15 @@ except KeyError:
 print(count, '\n', prov_error, dep_error)
 
 
-# ### Acomodando los tipos de datos
-
-# In[ ]:
-
-
-
-
-
 # ---
+
+# ## Coronel Suarez, General La Madrid y alrededores
 
 # In[113]:
 
 
 estructura['Buenos Aires'].keys()
 
-
-# ## Coronel Suarez y alrededores
 
 # In[114]:
 
@@ -111,47 +104,4 @@ Area_dep = {dep: estructura['Buenos Aires'][dep] for dep in list_area}
 
 Area_dep['General La Madrid'] = pd.concat([Area_dep['General La Madrid'], Area_dep['General la Madrid']], ignore_index=True)
 del Area_dep['General la Madrid']
-
-
-# ### Mapa
-
-# In[116]:
-
-
-import folium
-import json
-
-
-# In[117]:
-
-
-# Cargando limites geograficos de los departamentos
-with open('../visualizacion/geojson/suarez_alrededores.geojson') as f:
-    geojson_data = json.load(f)
-
-# mapa object
-mapa = folium.Map(location=[-37.45798801348687, -61.93294229940922], zoom_start=8)
-
-# Agrega la capa GEOJSON al mapa y aplica estilos
-folium.GeoJson(
-    geojson_data,
-    style_function=lambda features: {
-        'fillColor': 'green',   # Color de relleno verde
-        'color': 'black',       # Color del contorno de los departamentos
-        'weight': 2,            # Grosor del contorno de los departamentos
-        'fillOpacity': 0.5      # Opacidad del relleno de los departamentos
-    }
-).add_to(mapa)
-
-# Agregar marcadores
-folium.Marker([-37.29261188022635, -62.20015596276018], popup='Don Gaston').add_to(mapa)
-folium.Marker([-37.31521756433013, -61.49986789793718], popup='La Carola').add_to(mapa)
-# Muestra el mapa
-mapa
-
-
-# In[ ]:
-
-
-
 
