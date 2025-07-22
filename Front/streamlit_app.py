@@ -36,7 +36,7 @@ st.markdown("---")
 
 ######################### Folium #########################
 # Load GeoJSON data
-with open("../Back/visualizacion/geojson/Dep_BAires.geojson", encoding="utf-8") as f: 
+with open("../Back/geojson/Dep_BAires.geojson", encoding="utf-8") as f: 
     geo_json_data = json.load(f)
 
 # Extract departments
@@ -74,3 +74,9 @@ folium.GeoJson(
 
 # Displaying the map in Streamlit
 folium_static(mapa, width=700, height=400)
+
+# Displaying the selected departments
+if selected_deptos:
+    st.markdown(f"<h2 style='font-size: 25px; color: #DED3C4;'>Departamentos seleccionados:</h2><br><p style='font-size: 15px;'>{', '.join([depto.capitalize() for depto in selected_deptos])}</p>", unsafe_allow_html=True)
+else:
+    st.markdown("<h2 style='font-size: 25px; color: #DED3C4;'>No se han seleccionado departamentos</h2>", unsafe_allow_html=True)
