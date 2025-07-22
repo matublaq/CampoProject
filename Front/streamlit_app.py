@@ -43,7 +43,7 @@ with open("../Back/visualizacion/geojson/Dep_BAires.geojson", encoding="utf-8") 
 departamentos = sorted([feature['properties']['departamento'] for feature in geo_json_data['features']])
 
 # Sidebar for departament selection
-selected_deptos = st.multiselect("Departamentos", departamentos)
+selected_deptos = st.multiselect("Seleccionar departamentos", departamentos)
 def estilo(feature):
     depto = feature['properties']['departamento']
     if depto in selected_deptos:
@@ -70,5 +70,7 @@ folium.GeoJson(
     #tooltip=folium.features.GeoJsonTooltip(fields=['departamento'], aliases=['Departamento:'])
 ).add_to(mapa)
 
+
+
 # Displaying the map in Streamlit
-folium_static(mapa, width=650, height=400)
+folium_static(mapa, width=700, height=400)
