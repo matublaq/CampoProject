@@ -70,8 +70,6 @@ folium.GeoJson(
     #tooltip=folium.features.GeoJsonTooltip(fields=['departamento'], aliases=['Departamento:'])
 ).add_to(mapa)
 
-
-
 # Displaying the map in Streamlit
 folium_static(mapa, width=700, height=400)
 
@@ -80,3 +78,4 @@ if selected_deptos:
     st.markdown(f"<h2 style='font-size: 25px; color: #DED3C4;'>Departamentos seleccionados:</h2><br><p style='font-size: 15px;'>{', '.join([depto.capitalize() for depto in selected_deptos])}</p>", unsafe_allow_html=True)
 else:
     st.markdown("<h2 style='font-size: 25px; color: #DED3C4;'>No se han seleccionado departamentos</h2>", unsafe_allow_html=True)
+
