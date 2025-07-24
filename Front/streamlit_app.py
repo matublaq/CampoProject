@@ -8,6 +8,7 @@ import numpy as np
 
 import folium
 import json
+import topojson
 
 
 ######################### Configuration #########################
@@ -35,8 +36,9 @@ st.markdown("<h1 style='font-size: 40px; text-align: center; color: #DED3C4;'>Fa
 st.markdown("---")
 
 ######################### Folium #########################
+########## GEOJSON ##########
 # Load GeoJSON data
-with open("../Back/geojson/Dep_BAires.geojson", encoding="utf-8") as f: 
+with open("../Back/geojson/departamentos-argentina.geojson", encoding="utf-8") as f: 
     geo_json_data = json.load(f)
 
 # Extract departments
