@@ -3,20 +3,26 @@
 
 # ## Run program
 
-# In[1]:
+# In[4]:
 
 
-get_ipython().run_line_magic('run', '1_DataCollection.ipynb')
+get_ipython().run_line_magic('run', 'DataCollection.ipynb')
 
 
-# In[2]:
+# In[5]:
 
 
-get_ipython().run_line_magic('run', '2_DataProcess.ipynb')
+get_ipython().run_line_magic('run', 'DataProcess.ipynb')
 
 
-# In[3]:
+# In[6]:
 
 
-get_ipython().run_line_magic('run', '3_sqlite3.ipynb')
+get_ipython().run_line_magic('run', 'DataAnalysis.ipynb')
+
+
+# In[7]:
+
+
+get_ipython().run_line_magic('run', 'sqlite3.ipynb')
 
