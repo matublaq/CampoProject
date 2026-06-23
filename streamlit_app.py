@@ -38,7 +38,7 @@ st.markdown("---")
 ######################### Folium #########################
 ########## GEOJSON ##########
 # Load GeoJSON data
-with open("../Back/geojson/departamentos-argentina.geojson", encoding="utf-8") as f: 
+with open("Back/geojson/departamentos-argentina.geojson", encoding="utf-8") as f: 
     geo_json_data = json.load(f)
 
 # Extract departments
